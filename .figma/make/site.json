@@ -1,0 +1,10 @@
+{
+  "description": "Access comprehensive, historical data on search results, keywords, ads, and AI responses to enhance marketing and SEO strategies for B2B teams.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
