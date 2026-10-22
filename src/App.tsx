@@ -1,9 +1,4 @@
-import {
-  type CSSProperties,
-  type FormEvent,
-  useEffect,
-  useState,
-} from "react"
+import { type CSSProperties, type FormEvent, useEffect, useState } from "react"
 
 type Page = "home" | "products" | "demo"
 
@@ -180,11 +175,7 @@ function Footer({ navigate }: { navigate: (page: Page) => void }) {
             </span>
             <span>QUERRION</span>
           </button>
-          <p>
-            Connected visibility data,
-            <br />
-            built to outlast the source.
-          </p>
+          <p>Clean, connected visibility data.</p>
         </div>
         <div className="footer-column">
           <span className="eyebrow">Product</span>
@@ -212,26 +203,26 @@ function Footer({ navigate }: { navigate: (page: Page) => void }) {
         <p>
           © 2026 Kompetra Labs LLC. Querrion is a product of Kompetra Labs LLC.
         </p>
-        <p className="system-status">
-          <span /> Systems operational
-        </p>
       </div>
     </footer>
   )
 }
 
 function SectionTitle({
-  index,
+  label,
   title,
   copy,
 }: {
-  index: string
+  label: string
   title: string
   copy?: string
 }) {
   return (
     <div className="section-heading">
-      <span className="section-index">{index}</span>
+      <span className="section-label">
+        <i aria-hidden="true" />
+        {label}
+      </span>
       <div>
         <h2>{title}</h2>
         {copy && <p>{copy}</p>}
@@ -242,52 +233,54 @@ function SectionTitle({
 
 function Home({ navigate }: { navigate: (page: Page) => void }) {
   const sources = [
-    ["01", "Search results", "Position #2", "“running shoes”"],
-    ["02", "Keywords", "Who ranks", "Who advertises"],
-    ["03", "Ads", "Video · Meta", "94 days · 3 placements"],
-    ["04", "AI answers", "Mentioned", "1 citation"],
+    ["Search results", "Product page", "Tree Runner · allbirds.com"],
+    ["Keywords", "Category terms", "sustainable running shoes"],
+    ["Ads", "Creative library", "Copy · media · landing pages"],
+    ["AI answers", "Answer tracking", "Prompts · mentions · citations"],
   ]
   const products = [
     [
       "Search results",
       "Organic rankings, paid ads and local results for any keyword and location, tracked over time.",
-      "SERP",
     ],
     [
       "Keywords",
       "Who ranks and who advertises on each keyword, and how that changes day to day.",
-      "KEY",
     ],
     [
       "Ads",
       "Ad creatives with real run dates, formats, placements and calls to action, with media stored so it never breaks.",
-      "ADS",
     ],
     [
       "AI answers",
       "What large language models say when people ask about your category, and which brands they mention and cite.",
-      "LLM",
     ],
   ]
   const messy = [
     [
+      "Everything the source returned",
+      "Only the datasets, brands and keywords you choose",
+    ],
+    [
+      "Loose matches mixed in with real results",
+      "A relevance flag on every record, so noise is easy to filter out",
+    ],
+    [
       "Template text like {{product.name}} in ad copy",
-      "The real copy for every version of a dynamic ad",
+      "The real copy for every version of an ad",
     ],
     [
-      "Image and video links that expire within days",
-      "Media stored permanently on our side",
+      "Links to images and videos that expire",
+      "Media stored permanently",
     ],
     [
-      "A snapshot that disappears when ads stop",
+      "A snapshot that disappears",
       "History kept from the day we first see a record",
     ],
-    ["Duplicates of the same creative", "Creatives grouped, with reuse counts"],
     [
-      "Page names that hide who’s advertising",
-      "Advertisers linked to their real brand and domain",
+      "Records with no context",
+      "Every record linked to its brand and domain",
     ],
-    ["Loose keyword matches", "A relevance flag on every result"],
   ]
   const fields = [
     [
@@ -324,16 +317,14 @@ function Home({ navigate }: { navigate: (page: Page) => void }) {
             <div className="pill">
               <span /> Connected visibility data
             </div>
-            <h1 aria-label="Search, ads and AI answers. One clean dataset.">
-              <span>Search, ads and AI answers.</span>
-              <span>
-                One <em>clean</em> dataset.
-              </span>
+            <h1 aria-label="The data you need. Ready the way you need.">
+              <span>The data you need.</span>
+              <span>Ready the way you need.</span>
             </h1>
             <p>
-              Querrion cleans and connects search results, keyword, ad and LLM
-              response data, and keeps the history. Build your product on it
-              through one API.
+              Tell us the datasets, brands and keywords that matter. Querrion
+              cleans, connects and delivers exactly that, by API or straight
+              into your warehouse.
             </p>
             <div className="hero-actions">
               <button
@@ -367,16 +358,44 @@ function Home({ navigate }: { navigate: (page: Page) => void }) {
 
       <section className="section paper">
         <div className="container">
+          <SectionTitle label="Your data, prepared" title="How it works" />
+          <div className="delivery-grid">
+            <article>
+              <DatabaseIcon />
+              <h3>You choose</h3>
+              <p>Pick the datasets, brands and keywords you care about.</p>
+            </article>
+            <article>
+              <DatabaseIcon />
+              <h3>We prepare it</h3>
+              <p>
+                Every record is cleaned, de-duplicated and linked to the real
+                brand behind it, with history kept.
+              </p>
+            </article>
+            <article>
+              <DatabaseIcon />
+              <h3>You receive it ready to use</h3>
+              <p>
+                By API, or as files in your S3, BigQuery or Snowflake.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="section paper">
+        <div className="container">
           <SectionTitle
-            index="01"
+            label="Connected coverage"
             title="One source for brand visibility data"
           />
           <div className="product-grid">
-            {products.map(([title, copy, code], i) => (
+            {products.map(([title, copy], i) => (
               <article className="product-card" key={title}>
                 <div className="card-top">
-                  <span>{code}</span>
-                  <span>0{i + 1}</span>
+                  <span>{title}</span>
+                  <span className="card-status">Live</span>
                 </div>
                 <div className="signal-icon">
                   <span />
@@ -399,19 +418,19 @@ function Home({ navigate }: { navigate: (page: Page) => void }) {
       <section className="section dark-section">
         <div className="container">
           <SectionTitle
-            index="02"
-            title="Raw data isn’t usable data"
-            copy="Raw ad and search data is messy, short-lived and hard to connect. Making it usable takes months of engineering. We’ve done that work."
+            label="Clean by default"
+            title="A data dump vs. data you can use"
+            copy="Most data providers send everything and leave the sorting to you. We do the work before it reaches you."
           />
           <div className="comparison">
             <div className="comparison-head">
-              <span>What raw data gives you</span>
-              <span>What Querrion gives you instead</span>
+              <span>A data dump</span>
+              <span>Querrion</span>
             </div>
             {messy.map(([raw, clean], i) => (
               <div className="comparison-row" key={raw}>
                 <div>
-                  <span className="row-number">0{i + 1}</span>
+                  <span className="remove-mark" aria-hidden="true" />
                   {raw}
                 </div>
                 <div>
@@ -427,14 +446,14 @@ function Home({ navigate }: { navigate: (page: Page) => void }) {
       <section className="section fields-section">
         <div className="container two-col-intro">
           <SectionTitle
-            index="03"
+            label="Enriched signals"
             title="Fields you’d otherwise have to build"
             copy="Signals, not just records. Each one is computed and kept up to date for you."
           />
           <div className="field-list">
             {fields.map(([name, copy], i) => (
               <div className="field-row" key={name}>
-                <span>0{i + 1}</span>
+                <span className="field-dot" aria-hidden="true" />
                 <div>
                   <h3>{name}</h3>
                   <p>{copy}</p>
@@ -455,31 +474,21 @@ function Home({ navigate }: { navigate: (page: Page) => void }) {
 
       <section className="section paper delivery-section">
         <div className="container">
-          <SectionTitle index="04" title="Delivered the way your team works" />
-          <div className="delivery-grid">
+          <SectionTitle
+            label="Flexible delivery"
+            title="Delivered the way your team works"
+            copy="Choose what you receive and how."
+          />
+          <div className="delivery-grid delivery-grid-two">
             <article>
               <DatabaseIcon />
-              <span className="card-label">Query</span>
-              <h3>REST API</h3>
-              <p>Query by keyword, advertiser, domain or record ID.</p>
-              <code>GET /v1/visibility</code>
+              <h3>Scope</h3>
+              <p>The datasets, brands and keywords you need.</p>
             </article>
             <article>
               <DatabaseIcon />
-              <span className="card-label">Sync</span>
-              <h3>Bulk delivery</h3>
-              <p>Daily or weekly files to your S3, BigQuery or Snowflake.</p>
-              <code>S3 · BQ · SNOWFLAKE</code>
-            </article>
-            <article>
-              <DatabaseIcon />
-              <span className="card-label">License</span>
-              <h3>Built to embed</h3>
-              <p>
-                Licensed for display inside your own product, with clear
-                attribution rules.
-              </p>
-              <code>PRODUCT-READY</code>
+              <h3>Method</h3>
+              <p>REST API, or files in your S3, BigQuery or Snowflake.</p>
             </article>
           </div>
         </div>
@@ -487,7 +496,10 @@ function Home({ navigate }: { navigate: (page: Page) => void }) {
 
       <section className="built-for">
         <div className="container">
-          <span className="section-index">05</span>
+          <span className="section-label section-label-light">
+            <i aria-hidden="true" />
+            Designed around your workflow
+          </span>
           <h2>
             Built for teams who turn
             <br />
@@ -495,17 +507,17 @@ function Home({ navigate }: { navigate: (page: Page) => void }) {
           </h2>
           <div className="audience-grid">
             <div>
-              <span>01</span>
+              <span className="audience-mark" aria-hidden="true" />
               <h3>Product teams</h3>
               <p>Building SEO, ad intelligence and brand monitoring tools.</p>
             </div>
             <div>
-              <span>02</span>
+              <span className="audience-mark" aria-hidden="true" />
               <h3>Agencies and brands</h3>
               <p>Feeding competitive data into their own dashboards.</p>
             </div>
             <div>
-              <span>03</span>
+              <span className="audience-mark" aria-hidden="true" />
               <h3>Research and investment</h3>
               <p>Tracking ad and search activity as a market signal.</p>
             </div>
@@ -515,8 +527,8 @@ function Home({ navigate }: { navigate: (page: Page) => void }) {
 
       <Closing
         navigate={navigate}
-        title="See the data on your own keywords"
-        copy="In a 30-minute demo we’ll pull live data for keywords and brands you choose, and walk through the API. Qualified teams get 14 days of trial access afterwards."
+        title="See your data, shaped for you."
+        copy="In a 30-minute demo, we'll pull a sample built around your keywords and brands, and show you how it would arrive in your stack."
       />
     </>
   )
@@ -525,28 +537,26 @@ function Home({ navigate }: { navigate: (page: Page) => void }) {
 function RecordGraphic({ sources }: { sources: string[][] }) {
   return (
     <div className="record-graphic reveal">
-      <div className="graphic-top">
-        <span>LIVE ENTITY GRAPH</span>
-        <span className="live">
-          <i /> LIVE RECORD
-        </span>
+      <div className="record-toolbar">
+        <span>Sample data view</span>
+        <span>Brand intelligence record</span>
       </div>
       <div className="map-canvas">
         <div className="map-grid" aria-hidden="true" />
         <div className="brand-node">
           <span className="node-pulse" aria-hidden="true" />
-          <div className="shoe-mark">Q</div>
+          <div className="shoe-mark">A</div>
           <div>
-            <strong>Example Running Co.</strong>
-            <span>example-running.com</span>
+            <small>Brand profile</small>
+            <strong>Allbirds</strong>
+            <span>allbirds.com</span>
           </div>
-          <b>ENTITY MATCHED</b>
         </div>
         <div className="flow-trunk" aria-hidden="true">
           <i />
         </div>
         <div className="source-grid">
-          {sources.map(([n, title, line1, line2], index) => (
+          {sources.map(([title, line1, line2], index) => (
             <div
               className="source-card"
               style={
@@ -554,9 +564,6 @@ function RecordGraphic({ sources }: { sources: string[][] }) {
               }
               key={title}
             >
-              <span className="source-status">
-                <i /> {n}
-              </span>
               <h4>{title}</h4>
               <strong>{line1}</strong>
               <small>{line2}</small>
@@ -572,7 +579,7 @@ function RecordGraphic({ sources }: { sources: string[][] }) {
       <div className="graphic-note">
         <span>Illustrative record</span>
         <b>Different sources</b>
-        <b>One verified domain</b>
+        <b>One brand and domain</b>
         <b>History kept</b>
       </div>
     </div>
@@ -599,7 +606,6 @@ function Closing({
         <button className="button button-lime" onClick={() => navigate("demo")}>
           Book a demo <ArrowIcon />
         </button>
-        <small>No sales deck. Just your data and our API.</small>
       </div>
     </section>
   )
@@ -608,7 +614,6 @@ function Closing({
 const currentDatasets = [
   {
     title: "Search results",
-    code: "SERP",
     intro:
       "Full search results pages for the keywords and locations you choose, captured on a schedule and kept over time.",
     included:
@@ -619,7 +624,6 @@ const currentDatasets = [
   },
   {
     title: "Keywords",
-    code: "KEY",
     intro:
       "The competitive picture for every keyword: who ranks, who advertises and how that’s changing.",
     included:
@@ -629,18 +633,16 @@ const currentDatasets = [
   },
   {
     title: "Ads",
-    code: "ADS",
     intro:
       "Ad creatives with the context raw ad data leaves out: real run dates, every version of dynamic ads, and media that doesn’t expire.",
     included:
       "Advertiser, copy and headline, format, call to action, landing page, placements, start and end dates, active status.",
     added:
       "Run time in days, real copy for template ads, creatives grouped with reuse counts, permanently stored media, keyword relevance flag.",
-    note: "Launch channels: Meta and Google search ads. Spend, impressions and targeting are not available because platforms don’t publish them—and we won’t estimate them as fact.",
+    note: "Launch channels: Meta and Google search ads. Spend, impressions and targeting are not available because platforms don’t publish them, and we won’t estimate them as fact.",
   },
   {
     title: "AI answers",
-    code: "LLM",
     intro:
       "What AI assistants say about your category, captured from the same prompts over time, so you can see how answers change.",
     included:
@@ -650,7 +652,6 @@ const currentDatasets = [
   },
   {
     title: "Advertisers",
-    code: "ENT",
     intro:
       "The connecting layer across all datasets: one record per brand, linking its domain, ad pages and social accounts.",
     included:
@@ -707,9 +708,8 @@ function Products({ navigate }: { navigate: (page: Page) => void }) {
               <em>field by field.</em>
             </h1>
             <p>
-              Four datasets at launch and five more on the way, all linked by
-              brand and domain, with history kept from the day we first see each
-              record.
+              Every dataset can be scoped to your brands and keywords. Here's
+              what's available, field by field.
             </p>
             <button
               className="button button-dark"
@@ -721,9 +721,6 @@ function Products({ navigate }: { navigate: (page: Page) => void }) {
           <div className="catalog-monitor">
             <div className="monitor-head">
               <span>QUERRION / DATA CATALOGUE</span>
-              <span className="live">
-                <i /> LIVE
-              </span>
             </div>
             <div className="monitor-entity">
               <span className="entity-mark">Q</span>
@@ -731,7 +728,7 @@ function Products({ navigate }: { navigate: (page: Page) => void }) {
                 <small>CONNECTING LAYER</small>
                 <strong>Brand + domain entity</strong>
               </div>
-              <code>01</code>
+              <code>LIVE</code>
             </div>
             <div className="monitor-flow" aria-hidden="true">
               <span />
@@ -740,38 +737,31 @@ function Products({ navigate }: { navigate: (page: Page) => void }) {
             <div className="monitor-list">
               {currentDatasets.slice(0, 4).map((item, index) => (
                 <div
-                  key={item.code}
+                  key={item.title}
                   style={
                     {
                       "--monitor-delay": `${0.2 + index * 0.12}s`,
                     } as CSSProperties
                   }
                 >
-                  <span>0{index + 1}</span>
-                  <b>{item.code}</b>
+                  <span className="monitor-dot" aria-hidden="true" />
                   <strong>{item.title}</strong>
-                  <i />
                 </div>
               ))}
             </div>
             <div className="monitor-foot">
               <span>HISTORY</span>
               <strong>First seen → today</strong>
-              <span>SYNCING</span>
             </div>
           </div>
           <div className="stat-strip">
             <div>
-              <strong>04</strong>
-              <span>Source datasets</span>
+              <strong>Connected</strong>
+              <span>Every source resolves to the same brand and domain</span>
             </div>
             <div>
-              <strong>01</strong>
-              <span>Connecting entity layer</span>
-            </div>
-            <div>
-              <strong>∞</strong>
-              <span>History retained</span>
+              <strong>Historical</strong>
+              <span>Every record is retained from first seen</span>
             </div>
           </div>
         </div>
@@ -780,7 +770,10 @@ function Products({ navigate }: { navigate: (page: Page) => void }) {
         <div className="container">
           <div className="catalogue-title">
             <div>
-              <span className="section-index">01</span>
+              <span className="section-label">
+                <i aria-hidden="true" />
+                Available now
+              </span>
               <div>
                 <h2>Available now</h2>
                 <p>
@@ -789,13 +782,10 @@ function Products({ navigate }: { navigate: (page: Page) => void }) {
                 </p>
               </div>
             </div>
-            <span className="availability">
-              <i /> Collecting data
-            </span>
           </div>
           <div className="dataset-list">
             {currentDatasets.map((item, i) => (
-              <Dataset item={item} number={i + 1} key={item.title} />
+              <Dataset item={item} initiallyOpen={i === 0} key={item.title} />
             ))}
           </div>
         </div>
@@ -803,7 +793,7 @@ function Products({ navigate }: { navigate: (page: Page) => void }) {
       <section className="section roadmap-section">
         <div className="container">
           <SectionTitle
-            index="02"
+            label="Coming next"
             title="On the roadmap"
             copy="Datasets we’re building next. Tell us which you need on your demo call: early customers help decide what ships first."
           />
@@ -812,10 +802,10 @@ function Products({ navigate }: { navigate: (page: Page) => void }) {
             contact details, or news articles for AI training.
           </p>
           <div className="roadmap-grid">
-            {roadmap.map(([title, intro, fields, built], i) => (
+            {roadmap.map(([title, intro, fields, built]) => (
               <article key={title}>
                 <div className="roadmap-top">
-                  <span>0{i + 1}</span>
+                  <span className="roadmap-mark" aria-hidden="true" />
                   <b>PLANNED</b>
                 </div>
                 <h3>{title}</h3>
@@ -836,7 +826,7 @@ function Products({ navigate }: { navigate: (page: Page) => void }) {
       </section>
       <section className="section delivery-products">
         <div className="container">
-          <SectionTitle index="03" title="Delivery" />
+          <SectionTitle label="Choose your workflow" title="Delivery" />
           <div className="delivery-table">
             <div className="delivery-row delivery-head">
               <span>Method</span>
@@ -845,21 +835,23 @@ function Products({ navigate }: { navigate: (page: Page) => void }) {
             </div>
             <div className="delivery-row">
               <strong>
-                <span>01</span> REST API
+                <span className="delivery-mark" aria-hidden="true" /> REST API
               </strong>
               <span>Products and apps that query on demand</span>
               <code>JSON</code>
             </div>
             <div className="delivery-row">
               <strong>
-                <span>02</span> Bulk delivery
+                <span className="delivery-mark" aria-hidden="true" /> Bulk
+                delivery
               </strong>
               <span>Data teams and warehouses</span>
               <code>S3 · BIGQUERY · SNOWFLAKE</code>
             </div>
             <div className="delivery-row">
               <strong>
-                <span>03</span> Custom datasets
+                <span className="delivery-mark" aria-hidden="true" /> Custom
+                datasets
               </strong>
               <span>One-off research and backfills</span>
               <code>AGREED PER PROJECT</code>
@@ -894,15 +886,14 @@ function Products({ navigate }: { navigate: (page: Page) => void }) {
 
 function Dataset({
   item,
-  number,
+  initiallyOpen,
 }: {
   item: typeof currentDatasets[number]
-  number: number
+  initiallyOpen: boolean
 }) {
   return (
-    <details className="dataset" open={number === 1}>
+    <details className="dataset" open={initiallyOpen}>
       <summary>
-        <span className="dataset-number">0{number}</span>
         <span className="dataset-glyph" aria-hidden="true">
           <i />
           <i />
@@ -914,7 +905,6 @@ function Dataset({
         </h3>
         <span className="dataset-intro">{item.intro}</span>
         <span className="dataset-end">
-          <code>{item.code}</code>
           <span className="plus" />
         </span>
       </summary>
@@ -940,8 +930,95 @@ function Dataset({
 
 function Demo() {
   const [submitted, setSubmitted] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  const clearError = (name: string) => {
+    setErrors((current) => {
+      if (!current[name]) return current
+      const next = { ...current }
+      delete next[name]
+      return next
+    })
+  }
+
   const submit = (event: FormEvent) => {
     event.preventDefault()
+    const form = event.currentTarget as HTMLFormElement
+    const data = new FormData(form)
+    const value = (name: string) => String(data.get(name) ?? "").trim()
+    const nextErrors: Record<string, string> = {}
+
+    if (!value("firstName")) nextErrors.firstName = "First name is required."
+    if (!value("lastName")) nextErrors.lastName = "Last name is required."
+
+    const email = value("workEmail")
+    if (!email) {
+      nextErrors.workEmail = "Work email is required."
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      nextErrors.workEmail = "Enter a valid work email."
+    } else {
+      const domain = email.split("@")[1]?.toLowerCase()
+      const freeDomains = new Set([
+        "gmail.com",
+        "yahoo.com",
+        "hotmail.com",
+        "outlook.com",
+        "live.com",
+        "msn.com",
+        "icloud.com",
+        "me.com",
+        "aol.com",
+        "proton.me",
+        "protonmail.com",
+        "gmx.com",
+        "mail.com",
+        "yandex.com",
+      ])
+      if (domain && freeDomains.has(domain)) {
+        nextErrors.workEmail = "Please use your work email."
+      }
+    }
+
+    if (!value("companyName")) {
+      nextErrors.companyName = "Company name is required."
+    }
+
+    const website = value("companyWebsite")
+    if (!website) {
+      nextErrors.companyWebsite = "Company website is required."
+    } else {
+      try {
+        const url = new URL(website)
+        if (!["http:", "https:"].includes(url.protocol) || !url.hostname) {
+          throw new Error("Invalid URL")
+        }
+      } catch {
+        nextErrors.companyWebsite =
+          "Enter a valid URL, including https:// or http://."
+      }
+    }
+
+    if (!value("country")) nextErrors.country = "Country is required."
+    if (!value("dataUse")) {
+      nextErrors.dataUse = "Select how you will use the data."
+    }
+    if (data.getAll("interestedData").length === 0) {
+      nextErrors.interestedData = "Choose at least one data type."
+    }
+    if (!value("whatBuilding")) {
+      nextErrors.whatBuilding = "Tell us what you are building."
+    }
+
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors)
+      const firstInvalid = form.querySelector<HTMLElement>(
+        `[name="${Object.keys(nextErrors)[0]}"]`,
+      )
+      firstInvalid?.focus()
+      return
+    }
+
+    setErrors({})
     setSubmitted(true)
   }
   return (
@@ -962,98 +1039,247 @@ function Demo() {
           </p>
           <div className="demo-steps">
             <div>
-              <span>01</span>
+              <span className="step-mark" aria-hidden="true" />
               <p>Book a time that suits you.</p>
             </div>
             <div>
-              <span>02</span>
+              <span className="step-mark" aria-hidden="true" />
               <p>See live data on your own keywords and brands.</p>
             </div>
             <div>
-              <span>03</span>
+              <span className="step-mark" aria-hidden="true" />
               <p>Walk through the API and delivery options.</p>
             </div>
             <div>
-              <span>04</span>
+              <span className="step-mark" aria-hidden="true" />
               <p>Get 14 days of trial access if there’s a fit.</p>
             </div>
-          </div>
-          <div className="demo-quote">
-            <p>
-              “No generic sales deck. We prepare a live sample for every call.”
-            </p>
-            <span>— The Querrion data team</span>
           </div>
         </div>
         <div className="form-wrap">
           {!submitted ? (
-            <form onSubmit={submit}>
+            <form onSubmit={submit} noValidate>
               <div className="form-heading">
                 <span>DEMO REQUEST</span>
                 <span>30 MIN</span>
               </div>
-              <h2>Tell us what you’re building.</h2>
+              <h2>
+                Tell us what you're building, and we'll shape a live sample to
+                it.
+              </h2>
               <div className="form-row">
-                <label>
+                <label className={errors.firstName ? "field-invalid" : ""}>
                   First name
                   <input
                     required
                     name="firstName"
                     placeholder="Ada"
                     autoComplete="given-name"
+                    aria-invalid={Boolean(errors.firstName)}
+                    aria-describedby={
+                      errors.firstName ? "firstName-error" : undefined
+                    }
+                    onChange={() => clearError("firstName")}
                   />
+                  {errors.firstName && (
+                    <span className="field-error" id="firstName-error">
+                      {errors.firstName}
+                    </span>
+                  )}
                 </label>
-                <label>
+                <label className={errors.lastName ? "field-invalid" : ""}>
                   Last name
                   <input
                     required
                     name="lastName"
                     placeholder="Lovelace"
                     autoComplete="family-name"
+                    aria-invalid={Boolean(errors.lastName)}
+                    aria-describedby={
+                      errors.lastName ? "lastName-error" : undefined
+                    }
+                    onChange={() => clearError("lastName")}
                   />
+                  {errors.lastName && (
+                    <span className="field-error" id="lastName-error">
+                      {errors.lastName}
+                    </span>
+                  )}
                 </label>
               </div>
-              <label>
+              <label className={errors.workEmail ? "field-invalid" : ""}>
                 Work email
                 <input
                   required
                   type="email"
-                  name="email"
+                  name="workEmail"
                   placeholder="ada@company.com"
                   autoComplete="email"
+                  aria-invalid={Boolean(errors.workEmail)}
+                  aria-describedby={
+                    errors.workEmail ? "workEmail-error" : undefined
+                  }
+                  onChange={() => clearError("workEmail")}
                 />
+                {errors.workEmail && (
+                  <span className="field-error" id="workEmail-error">
+                    {errors.workEmail}
+                  </span>
+                )}
               </label>
-              <label>
-                Company
+              <label className={errors.companyName ? "field-invalid" : ""}>
+                Company name
                 <input
                   required
-                  name="company"
+                  name="companyName"
                   placeholder="Company name"
                   autoComplete="organization"
+                  aria-invalid={Boolean(errors.companyName)}
+                  aria-describedby={
+                    errors.companyName ? "companyName-error" : undefined
+                  }
+                  onChange={() => clearError("companyName")}
                 />
+                {errors.companyName && (
+                  <span className="field-error" id="companyName-error">
+                    {errors.companyName}
+                  </span>
+                )}
               </label>
-              <label>
-                What are you hoping to build?
+              <label className={errors.companyWebsite ? "field-invalid" : ""}>
+                Company website
+                <input
+                  required
+                  type="url"
+                  name="companyWebsite"
+                  placeholder="https://company.com"
+                  autoComplete="url"
+                  aria-invalid={Boolean(errors.companyWebsite)}
+                  aria-describedby={
+                    errors.companyWebsite ? "companyWebsite-error" : undefined
+                  }
+                  onChange={() => clearError("companyWebsite")}
+                />
+                {errors.companyWebsite && (
+                  <span className="field-error" id="companyWebsite-error">
+                    {errors.companyWebsite}
+                  </span>
+                )}
+              </label>
+              <label className={errors.country ? "field-invalid" : ""}>
+                Country
+                <select
+                  required
+                  name="country"
+                  defaultValue=""
+                  aria-invalid={Boolean(errors.country)}
+                  aria-describedby={
+                    errors.country ? "country-error" : undefined
+                  }
+                  onChange={() => clearError("country")}
+                >
+                  <option value="" disabled>
+                    Select a country
+                  </option>
+                  <option value="United States">United States</option>
+                </select>
+                {errors.country && (
+                  <span className="field-error" id="country-error">
+                    {errors.country}
+                  </span>
+                )}
+              </label>
+              <label className={errors.dataUse ? "field-invalid" : ""}>
+                How will you use the data?
+                <select
+                  required
+                  name="dataUse"
+                  defaultValue=""
+                  aria-invalid={Boolean(errors.dataUse)}
+                  aria-describedby={
+                    errors.dataUse ? "dataUse-error" : undefined
+                  }
+                  onChange={() => clearError("dataUse")}
+                >
+                  <option value="" disabled>
+                    Select one
+                  </option>
+                  <option value="Internal analysis">Internal analysis</option>
+                  <option value="Inside our product">Inside our product</option>
+                  <option value="Both">Both</option>
+                </select>
+                {errors.dataUse && (
+                  <span className="field-error" id="dataUse-error">
+                    {errors.dataUse}
+                  </span>
+                )}
+              </label>
+              <fieldset
+                className={
+                  errors.interestedData
+                    ? "checkbox-field field-invalid"
+                    : "checkbox-field"
+                }
+              >
+                <legend>Which data are you interested in?</legend>
+                <div className="checkbox-grid">
+                  {[
+                    "Search results",
+                    "Keywords",
+                    "Ads",
+                    "AI answers",
+                    "A roadmap dataset",
+                  ].map((option) => (
+                    <label key={option}>
+                      <input
+                        type="checkbox"
+                        name="interestedData"
+                        value={option}
+                        aria-invalid={Boolean(errors.interestedData)}
+                        aria-describedby={
+                          errors.interestedData
+                            ? "interestedData-error"
+                            : undefined
+                        }
+                        onChange={() => clearError("interestedData")}
+                      />
+                      <span>{option}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.interestedData && (
+                  <span className="field-error" id="interestedData-error">
+                    {errors.interestedData}
+                  </span>
+                )}
+              </fieldset>
+              <label className={errors.whatBuilding ? "field-invalid" : ""}>
+                What are you building?
                 <textarea
                   required
-                  name="useCase"
-                  placeholder="Tell us about your product, data needs, or the brands and keywords you'd like to see."
-                  rows={4}
+                  name="whatBuilding"
+                  placeholder="Tell us about the product, analysis, or workflow you are building."
+                  rows={5}
+                  aria-invalid={Boolean(errors.whatBuilding)}
+                  aria-describedby={
+                    errors.whatBuilding ? "whatBuilding-error" : undefined
+                  }
+                  onChange={() => clearError("whatBuilding")}
                 />
+                {errors.whatBuilding && (
+                  <span className="field-error" id="whatBuilding-error">
+                    {errors.whatBuilding}
+                  </span>
+                )}
               </label>
               <label>
-                Dataset of interest
-                <select defaultValue="">
-                  <option value="" disabled>
-                    Select a dataset
-                  </option>
-                  <option>Search results</option>
-                  <option>Keywords</option>
-                  <option>Ads</option>
-                  <option>AI answers</option>
-                  <option>Multiple datasets</option>
-                  <option>Roadmap dataset</option>
-                </select>
+                Keywords or brands to show in the demo{" "}
+                <span className="optional-label">Optional</span>
+                <textarea
+                  name="demoSubjects"
+                  placeholder="Add any keywords, brands, or domains you would like us to prepare."
+                  rows={3}
+                />
               </label>
               <button className="button button-lime form-submit" type="submit">
                 Choose a time <ArrowIcon />
